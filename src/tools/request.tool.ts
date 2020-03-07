@@ -1,4 +1,4 @@
-import { logger } from './logger.tool'
+import LoggerTool from './logger.tool'
 
 export default class RequestTool {
   static fetchJson = async (url: string, noCors: boolean = false) => {
@@ -14,7 +14,7 @@ export default class RequestTool {
       const data = await fetchResponse.json()
       return data
     } catch (e) {
-      logger(e)
+      LoggerTool.log(e)
       return null
     }
   }
@@ -25,7 +25,7 @@ export default class RequestTool {
       const data = await fetchResponse.json()
       return data
     } catch (e) {
-      logger(e)
+      LoggerTool.log(e)
       return null
     }
   }

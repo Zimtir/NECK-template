@@ -1,6 +1,6 @@
 {
   "name": "node-crud-kit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A helpers to create a CRUD",
   "main": "lib/index.js",
   "scripts": {

@@ -1,3 +1,5 @@
-export const logger = (...data: any) => {
-  console.log(data)
+export default class Logger {
+  static log = (...data: any) => {
+    console.log(data)
+  }
 }

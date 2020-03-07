@@ -15,7 +15,7 @@ export default class BaseRepository<T> implements IRepository<T>, IPersonReposit
   public get = async (id: number) => {
     return this.db.findOne({
       where: {
-        id: id,
+        id,
       },
     })
   }
@@ -31,7 +31,7 @@ export default class BaseRepository<T> implements IRepository<T>, IPersonReposit
   public remove = async (id: number) => {
     return this.db.destroy({
       where: {
-        id: id,
+        id,
       },
     })
   }
@@ -39,7 +39,7 @@ export default class BaseRepository<T> implements IRepository<T>, IPersonReposit
   public removeByUser = async (user: number) => {
     return this.db.destroy({
       where: {
-        user: user,
+        user,
       },
     })
   }
@@ -47,7 +47,7 @@ export default class BaseRepository<T> implements IRepository<T>, IPersonReposit
   public getByUser = async (user: number) => {
     return this.db.findOne({
       where: {
-        user: user,
+        user,
       },
     })
   }
@@ -55,7 +55,7 @@ export default class BaseRepository<T> implements IRepository<T>, IPersonReposit
   public getAllByUser = async (user: number) => {
     return this.db.findAll({
       where: {
-        user: user,
+        user,
       },
     })
   }

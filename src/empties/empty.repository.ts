@@ -2,8 +2,7 @@ import IRepository from '../interfaces/repository.interface'
 import IPersonRepository from '../interfaces/person.repository.interface'
 import NullException from '../exceptions/null.exception'
 
-export default class EmptyRepository<T>
-  implements IRepository<T>, IPersonRepository<T> {
+export default class EmptyRepository<T> implements IRepository<T>, IPersonRepository<T> {
   db: any
 
   public constructor(db: any) {

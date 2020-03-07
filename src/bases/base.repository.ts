@@ -1,8 +1,7 @@
 import IRepository from '../interfaces/repository.interface'
 import IPersonRepository from '../interfaces/person.repository.interface'
 
-export default class BaseRepository<T>
-  implements IRepository<T>, IPersonRepository<T> {
+export default class BaseRepository<T> implements IRepository<T>, IPersonRepository<T> {
   db: any
 
   public constructor(db: any) {
@@ -16,8 +15,8 @@ export default class BaseRepository<T>
   public get = async (id: number) => {
     return this.db.findOne({
       where: {
-        id: id
-      }
+        id: id,
+      },
     })
   }
 
@@ -32,32 +31,32 @@ export default class BaseRepository<T>
   public remove = async (id: number) => {
     return this.db.destroy({
       where: {
-        id: id
-      }
+        id: id,
+      },
     })
   }
 
   public removeByUser = async (user: number) => {
     return this.db.destroy({
       where: {
-        user: user
-      }
+        user: user,
+      },
     })
   }
 
   public getByUser = async (user: number) => {
     return this.db.findOne({
       where: {
-        user: user
-      }
+        user: user,
+      },
     })
   }
 
   public getAllByUser = async (user: number) => {
     return this.db.findAll({
       where: {
-        user: user
-      }
+        user: user,
+      },
     })
   }
 }

@@ -4,7 +4,7 @@ enum SocialEnum {
   fb = 'facebook',
   tg = 'telegram',
   go = 'google',
-  tw = 'twitter'
+  tw = 'twitter',
 }
 
 export default SocialEnum

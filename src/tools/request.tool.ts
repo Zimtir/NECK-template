@@ -21,10 +21,7 @@ export default class RequestTool {
 
   static fetchPostJson = async (url: string, params: any) => {
     try {
-      const fetchResponse = await fetch(
-        url,
-        RequestTool.generatePostParams(params)
-      )
+      const fetchResponse = await fetch(url, RequestTool.generatePostParams(params))
       const data = await fetchResponse.json()
       return data
     } catch (e) {
@@ -37,10 +34,10 @@ export default class RequestTool {
     return {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify(param)
+      body: JSON.stringify(param),
     }
   }
 }

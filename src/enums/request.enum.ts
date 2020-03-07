@@ -2,7 +2,7 @@ enum RequestEnum {
   get = 'get',
   post = 'post',
   put = 'put',
-  delete = 'delete'
+  delete = 'delete',
 }
 
 export default RequestEnum

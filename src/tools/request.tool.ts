@@ -7,7 +7,7 @@ export default class RequestTool {
   }
 
   static checkParams(res: any, params: any[]) {
-    let output = CommonTool.isNonEmptyList(params)
+    const output = CommonTool.isNonEmptyList(params)
 
     if (!output) {
       RequestTool.decline(res)

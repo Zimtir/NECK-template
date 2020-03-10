@@ -1,10 +1,19 @@
 enum SocialEnum {
-  none = 'none',
-  vk = 'vkontakte',
-  fb = 'facebook',
-  tg = 'telegram',
-  go = 'google',
-  tw = 'twitter',
+  google = 'google',
+  vkontakte = 'vkontakte',
+  telegram = 'telegram',
+  github = 'github',
+  twitter = 'twitter',
+  facebook = 'facebook',
+  yandex = 'yandex',
+  instagram = 'instagram',
+  wechat = 'wechat',
+  local = 'local',
+  saml = 'saml',
+  steam = 'steam',
+  azure = 'azure',
+  spotify = 'spotify',
+  linkedin = 'linkedin',
 }
 
 export default SocialEnum

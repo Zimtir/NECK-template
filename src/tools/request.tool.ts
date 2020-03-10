@@ -1,6 +1,21 @@
 import LoggerTool from './logger.tool'
+import CommonTool from './common.tool'
 
 export default class RequestTool {
+  static decline = (res: any, status: number = 503) => {
+    res.sendStatus(status)
+  }
+
+  static checkParams(res: any, params: any[]) {
+    let output = CommonTool.isNonEmptyList(params)
+
+    if (!output) {
+      RequestTool.decline(res)
+    }
+
+    return output
+  }
+
   static fetchJson = async (url: string, noCors: boolean = false) => {
     try {
       let fetchResponse: Response

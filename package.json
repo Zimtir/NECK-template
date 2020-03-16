@@ -1,6 +1,6 @@
 {
   "name": "node-crud-kit",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A helpers to create a CRUD",
   "main": "lib/index.js",
   "scripts": {
@@ -28,7 +28,6 @@
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.17.0",
     "@types/jest": "^25.1.4",
-    "@types/jsonwebtoken": "^8.3.8",
     "@types/node": "^13.9.1",
     "@types/passport": "^1.0.3",
     "jest": "^25.1.0",

@@ -5,4 +5,6 @@ export default interface IUser {
   name: string
   social: ISocial
   created: Date
+  photo: string
+  email: string
 }

@@ -25,8 +25,12 @@
   "author": "Marat Zimnurov <zimit@mail.ru>",
   "license": "MIT",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express-session": "^1.17.0",
     "@types/jest": "^25.1.4",
+    "@types/jsonwebtoken": "^8.3.8",
     "@types/node": "^13.9.1",
+    "@types/passport": "^1.0.3",
     "jest": "^25.1.0",
     "prettier": "^1.19.1",
     "ts-jest": "^25.2.1",
@@ -35,6 +39,11 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "crypto": "^1.0.1"
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.1"
   }
 }

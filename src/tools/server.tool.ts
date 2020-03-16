@@ -1,7 +1,14 @@
 import LoggerTool from './logger.tool'
 import CommonTool from './common.tool'
 import crypto from 'crypto'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import passport from 'passport'
+import session from 'express-session'
+import jsonwebtoken from 'jsonwebtoken'
+
 import IUser from '../interfaces/user.interface'
+import IJWT from '../interfaces/jwt.interface'
 
 export default class ServerTool {
   static generatePayload(key: string, token: string, hmac: string, user: IUser) {
@@ -65,5 +72,35 @@ export default class ServerTool {
       res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
       next()
     })
+  }
+
+  static initSession = (app: any, secret: string) => {
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: true }))
+
+    app.use(cookieParser())
+
+    app.use(
+      session({
+        secret: secret,
+        resave: true,
+        saveUninitialized: true,
+      }),
+    )
+
+    app.use(passport.initialize())
+    app.use(passport.session())
+  }
+
+  static generateAccessToken = (user: IUser, config: IJWT) => {
+    const token = jsonwebtoken.sign(
+      {
+        exp: config.expiration,
+        data: JSON.parse(JSON.stringify(user)),
+      },
+      config.key,
+    )
+
+    return token
   }
 }

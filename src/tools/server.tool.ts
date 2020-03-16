@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import session from 'express-session'
-import * as jsonwebtoken from 'jsonwebtoken'
+import jsonwebtoken from 'jsonwebtoken'
 
 import IUser from '../interfaces/user.interface'
 import IJWT from '../interfaces/jwt.interface'
@@ -116,12 +116,7 @@ export default class ServerTool {
         return undefined
       }
 
-      const result = jsonwebtoken.verify(token, config.key, (err: any, decoded: any) => {
-        if (CommonTool.isNonEmpty(decoded) && !err) return decoded.data
-        else return undefined
-      })
-
-      return result
+      return jsonwebtoken.verify(token, config.key)
     } catch (err) {
       LoggerTool.log(`can't parse token`)
       return undefined

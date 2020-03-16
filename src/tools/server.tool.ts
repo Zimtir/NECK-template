@@ -102,4 +102,29 @@ export default class ServerTool {
 
     return token
   }
+
+  static parseJwtToken = (request: any, config: IJWT) => {
+    try {
+      let token = ''
+
+      if (CommonTool.isNonEmpty(request.query.jwt)) {
+        token = request.query.jwt
+      } else if (CommonTool.isNonEmpty(request.cookies[config.cookieName])) {
+        token = request.cookies[config.cookieName]
+      } else {
+        LoggerTool.log('JWT token not set')
+        return undefined
+      }
+
+      const result = jsonwebtoken.verify(token, config.key, (err, decoded: any) => {
+        if (CommonTool.isNonEmpty(decoded) && !err) return decoded.data
+        else return undefined
+      })
+
+      return result
+    } catch (err) {
+      LoggerTool.log(`can't parse token`)
+      return undefined
+    }
+  }
 }

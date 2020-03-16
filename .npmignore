@@ -2,3 +2,8 @@ src
 tsconfig.json
 tslint.json
 .prettierrc
+__tests__
+package.json
+package-lock.json
+jestconfig.json
+.gitignore

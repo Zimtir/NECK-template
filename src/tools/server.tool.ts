@@ -27,8 +27,8 @@ export default class ServerTool {
         LoggerTool.log('expectedHmac', expectedHmac)
 
         if (hmac === expectedHmac) {
-          var payloadJson = JSON.stringify({
-            token: token,
+          const payloadJson = JSON.stringify({
+            token,
             email: user.email,
             name: user.name,
             photo: user.photo,
@@ -57,14 +57,13 @@ export default class ServerTool {
 
   static setOrigins(app: any, origins: string[]) {
     app.use((req: any, res: any, next: any) => {
-      for (var i = 0; i < origins.length; i++) {
-        var origin = origins[i]
+      for (const origin of origins) {
         try {
           if (req.headers.origin.indexOf(origin) > -1) {
             res.header('Access-Control-Allow-Origin', req.headers.origin)
           }
         } catch (err) {
-          LoggerTool.log('Header not contains origins')
+          LoggerTool.log('Header not contains origin', origin)
         }
       }
 
@@ -82,7 +81,7 @@ export default class ServerTool {
 
     app.use(
       session({
-        secret: secret,
+        secret,
         resave: true,
         saveUninitialized: true,
       }),

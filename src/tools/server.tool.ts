@@ -14,13 +14,13 @@ export default class ServerTool {
   static generatePayload(key: string, token: string, hmac: string, user: IUser) {
     if (CommonTool.isNonEmptyList([key, token, hmac, user])) {
       if (CommonTool.isNonEmpty(user.email)) {
-        const hexToken = Buffer.from(token, 'hex').toString()
+        const hexToken = Buffer.from(token, 'hex')
         const hexHmac = Buffer.from(hmac, 'hex')
         const hexSecret = Buffer.from(key, 'hex')
 
         const expectedHmac = crypto
           .createHmac('sha256', hexSecret)
-          .update(hexToken, 'utf8')
+          .update(hexToken)
           .digest('hex')
 
         LoggerTool.log('hexHmac', hexHmac)
@@ -39,11 +39,7 @@ export default class ServerTool {
             .update(payloadJson, 'utf8')
             .digest('hex')
 
-          LoggerTool.log('outHmac', outHmac)
-
           const payloadHex = Buffer.from(payloadJson, 'utf8').toString('hex')
-
-          LoggerTool.log('payloadHex', payloadHex)
 
           return {
             hmac: outHmac,

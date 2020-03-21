@@ -151,7 +151,7 @@ export default class ServerTool {
     next()
   }
 
-  static ensurAuthEnumenticated = (req: any, res: any, next: any) => {
+  static ensureAuthenticated = (req: any, res: any, next: any) => {
     if (req.isAuthenticated()) {
       return next()
     }

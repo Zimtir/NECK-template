@@ -14,6 +14,7 @@ enum SocialEnum {
   azure = 'azure',
   spotify = 'spotify',
   linkedin = 'linkedin',
+  none = 'none',
 }
 
 export default SocialEnum

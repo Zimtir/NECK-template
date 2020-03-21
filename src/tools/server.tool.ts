@@ -9,6 +9,7 @@ import jsonwebtoken from 'jsonwebtoken'
 
 import IUser from '../interfaces/user.interface'
 import IJWT from '../interfaces/jwt.interface'
+import RequestTool from './request.tool'
 
 export default class ServerTool {
   static generatePayload(key: string, token: string, hmac: string, user: IUser) {
@@ -81,8 +82,8 @@ export default class ServerTool {
         resave: true,
         saveUninitialized: true,
         cookie: {
-          maxAge: expiration
-        }
+          maxAge: expiration,
+        },
       }),
     )
 
@@ -120,5 +121,68 @@ export default class ServerTool {
       LoggerTool.log(`can't parse token`)
       return undefined
     }
+  }
+
+  static checkParams = (response: any, params: any[]) => {
+    const output = CommonTool.isNonEmptyList(params)
+
+    if (!output) {
+      RequestTool.decline(response)
+    }
+
+    return output
+  }
+
+  static sendStatus(promise: Promise<any>, res: any) {
+    promise
+      .then((r: any) => {
+        LoggerTool.log(r)
+        res.send(JSON.stringify(r))
+      })
+      .catch((err: any) => {
+        LoggerTool.log('error at send status')
+        LoggerTool.log(err)
+        RequestTool.decline(res)
+      })
+  }
+
+  static withoutAuth = (req: any, res: any, next: any) => {
+    LoggerTool.log('withoutAuth')
+    next()
+  }
+
+  static ensurAuthEnumenticated = (req: any, res: any, next: any) => {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    ServerTool.needLogin(res)
+  }
+
+  static needLogin = (res: any) => {
+    res.send(null)
+  }
+
+  static handleServerErrors = (server: any) => {
+    server.on('listening', () => {
+      const addr = server.address()
+      const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
+
+      LoggerTool.log(`server listen at ${bind}`)
+    })
+  }
+
+  static handleAppErrors = (app: any) => {
+    app.use((req: any, res: any, next: any) => {
+      const err = new Error('Not Found')
+      next(err)
+    })
+
+    app.use((err: any, req: any, res: any, next: any) => {
+      res.locals.message = err.message
+      res.locals.error = {}
+      res.status(err.status || 500)
+      res.json(err)
+      LoggerTool.log(err, next)
+    })
   }
 }

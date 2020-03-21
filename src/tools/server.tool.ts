@@ -69,7 +69,7 @@ export default class ServerTool {
     })
   }
 
-  static initSession = (app: any, secret: string) => {
+  static initSession = (app: any, secret: string, expiration: number) => {
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -80,6 +80,9 @@ export default class ServerTool {
         secret,
         resave: true,
         saveUninitialized: true,
+        cookie: {
+          maxAge: expiration
+        }
       }),
     )
 

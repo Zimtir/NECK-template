@@ -6,10 +6,13 @@ import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import session from 'express-session'
 import jsonwebtoken from 'jsonwebtoken'
-
+import express from 'express'
+import morgan from 'morgan'
 import IUser from '../interfaces/user.interface'
 import IJWT from '../interfaces/jwt.interface'
 import RequestTool from './request.tool'
+import IExpressConfiguration from '../interfaces/express.config.interface'
+import IExpressInit from '../interfaces/express.init.interface'
 
 export default class ServerTool {
   static generatePayload(key: string, token: string, hmac: string, user: IUser) {
@@ -68,6 +71,36 @@ export default class ServerTool {
       res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
       next()
     })
+  }
+
+  static initExpress = (configuration: IExpressConfiguration): IExpressInit => {
+    if (configuration.dotenv.enabled) {
+      require('dotenv').config({ path: configuration.dotenv.path })
+    }
+
+    const app: any = express()
+
+    if (configuration.morgan) {
+      app.use(morgan('combined'))
+    }
+
+    if (configuration.bodyParser) {
+      app.use(bodyParser.json())
+      app.use(bodyParser.urlencoded({ extended: true }))
+    }
+
+    return {
+      app,
+      installAfterRoutes: () => {
+        if (configuration.routeView) {
+          const showRoutes = require('express-list-endpoints')
+          LoggerTool.log(showRoutes(app))
+        }
+        if (configuration.handleErrors) {
+          ServerTool.handleAppErrors(app)
+        }
+      },
+    }
   }
 
   static initSession = (app: any, secret: string, expiration: number) => {

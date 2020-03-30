@@ -7,4 +7,9 @@ export default interface IExpressConfiguration {
   }
   handleErrors: boolean
   morgan: boolean
+  listen: {
+    enableed: boolean
+    port: number
+    callback: () => void
+  }
 }

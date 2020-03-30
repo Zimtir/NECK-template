@@ -99,6 +99,10 @@ export default class ServerTool {
         if (configuration.handleErrors) {
           ServerTool.handleAppErrors(app)
         }
+
+        if (configuration.listen.enableed) {
+          app.listen(configuration.listen.port, configuration.listen.callback)
+        }
       },
     }
   }

@@ -1,6 +1,6 @@
 {
   "name": "node-crud-kit",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A helpers to create a CRUD",
   "main": "lib/index.js",
   "repository": "Zimtir/NECK-template",

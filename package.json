@@ -1,6 +1,6 @@
 {
   "name": "node-crud-kit",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "A helpers to create a CRUD",
   "main": "lib/index.js",
   "repository": "Zimtir/NECK-template",
@@ -54,6 +54,7 @@
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-list-endpoints": "^4.0.1",
     "express-serve-static-core": "^0.1.1",
     "express-session": "^1.17.0",
     "jsonwebtoken": "^8.5.1",

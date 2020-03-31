@@ -7,3 +7,4 @@ package.json
 package-lock.json
 jestconfig.json
 .gitignore
+node_modules

@@ -91,7 +91,7 @@ export default class ServerTool {
 
     return {
       app,
-      installAfterRoutes: (port: string = '', callback: () => void = () => {}) => {
+      installAfterRoutes: (port: string = '', callback: any) => {
         if (configuration.routeView) {
           const showRoutes = require('express-list-endpoints')
           LoggerTool.log(showRoutes(app))

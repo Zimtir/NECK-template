@@ -3,6 +3,8 @@ import CommonTool from './common.tool'
 import crypto from 'crypto'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import compression from 'compression'
+import * as sapper from '@sapper/server'
 import passport from 'passport'
 import session from 'express-session'
 import jsonwebtoken from 'jsonwebtoken'
@@ -22,10 +24,7 @@ export default class ServerTool {
         const hexHmac = Buffer.from(hmac, 'hex')
         const hexSecret = Buffer.from(key, 'hex')
 
-        const expectedHmac = crypto
-          .createHmac('sha256', hexSecret)
-          .update(hexToken)
-          .digest('hex')
+        const expectedHmac = crypto.createHmac('sha256', hexSecret).update(hexToken).digest('hex')
 
         LoggerTool.log('hexHmac', hexHmac)
         LoggerTool.log('expectedHmac', expectedHmac)
@@ -38,10 +37,7 @@ export default class ServerTool {
             photo: user.photo,
           })
 
-          const outHmac = crypto
-            .createHmac('sha256', hexSecret)
-            .update(payloadJson, 'utf8')
-            .digest('hex')
+          const outHmac = crypto.createHmac('sha256', hexSecret).update(payloadJson, 'utf8').digest('hex')
 
           const payloadHex = Buffer.from(payloadJson, 'utf8').toString('hex')
 
@@ -82,6 +78,18 @@ export default class ServerTool {
 
     if (configuration.morgan) {
       app.use(morgan('combined'))
+    }
+
+    if (configuration.static.enabled) {
+      app.use(express.static(configuration.static.path))
+    }
+
+    if (configuration.compression.enabled) {
+      app.use(compression({ threshold: configuration.compression.threshold }))
+    }
+
+    if (configuration.sapper) {
+      app.use(sapper.middleware())
     }
 
     if (configuration.bodyParser) {

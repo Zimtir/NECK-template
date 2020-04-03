@@ -8,4 +8,13 @@ export default interface IExpressConfiguration {
   handleErrors: boolean
   morgan: boolean
   listen: boolean
+  static: {
+    enabled: boolean
+    path: string
+  }
+  compression: {
+    enabled: boolean
+    threshold: number
+  }
+  sapper: boolean
 }

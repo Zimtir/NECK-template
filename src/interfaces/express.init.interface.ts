@@ -1,4 +1,6 @@
+import * as core from 'express-serve-static-core'
+
 export default interface IExpressInit {
-  app: any
+  app: core.Express
   installAfterRoutes: (port?: string, callback?: () => void) => void
 }

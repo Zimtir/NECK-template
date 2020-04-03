@@ -24,7 +24,7 @@ export default class CommonTool {
   }
 
   static toogle = (tag: string, className: string) => {
-    let element = document.querySelector(tag)
+    const element = document.querySelector(tag)
     if (element) {
       element.classList.add(className)
     }
@@ -35,10 +35,10 @@ export default class CommonTool {
   }
 
   static getClickAction = (id: string) => {
-    let element = CommonTool.getElement(id)
+    const element = CommonTool.getElement(id)
     if (element) {
       return element.click
-    } else return () => {}
+    } else return null
   }
 
   static parseJwt = (token: string) => {
@@ -51,9 +51,9 @@ export default class CommonTool {
 
   static getCookie = (name: string) => {
     try {
-      let value = ' ' + document.cookie
-      let parts = value.split(' ' + name + '=')
-      if (parts && parts.length == 2) {
+      const value = ' ' + document.cookie
+      const parts = value.split(' ' + name + '=')
+      if (parts && parts.length === 2) {
         return parts.pop()!.split('').shift()
       } else {
         return ''
@@ -63,12 +63,12 @@ export default class CommonTool {
     }
   }
 
-  static getInput = (name: string): HTMLInputElement => {
-    return <HTMLInputElement>CommonTool.getElement(name)
+  static getInput = (id: string): HTMLInputElement => {
+    return CommonTool.getElement(id) as HTMLInputElement
   }
 
-  static getElement = (name: string): HTMLElement => {
-    return <HTMLElement>document.getElementById(name)
+  static getElement = (id: string): HTMLElement => {
+    return document.getElementById(id) as HTMLElement
   }
 
   static isPage = (path: string) => {
@@ -78,8 +78,8 @@ export default class CommonTool {
   static getUrlAttributes = () => {
     let output: string[] = []
 
-    let self = window.location.toString()
-    let querystring = self.split('?')
+    const self = window.location.toString()
+    const querystring = self.split('?')
     if (querystring.length > 1) {
       output = querystring[1].split('&')
     }
@@ -89,13 +89,15 @@ export default class CommonTool {
 
   getUrlAttrVal = (name: string) => {
     let output = null
-    let attrs = CommonTool.getUrlAttributes()
+    const attrs = CommonTool.getUrlAttributes()
 
-    for (let attr in attrs) {
-      let keyval = attrs[attr].split('=')
-      if (keyval[0] === name) {
-        output = keyval[1]
-        break
+    for (const attr in attrs) {
+      if (attrs.hasOwnProperty(attr)) {
+        const keyval = attrs[attr].split('=')
+        if (keyval[0] === name) {
+          output = keyval[1]
+          break
+        }
       }
     }
 

@@ -87,7 +87,7 @@ export default class CommonTool {
     return output
   }
 
-  getUrlAttrVal = (name: string) => {
+  static getUrlAttrVal = (name: string) => {
     let output = null
     const attrs = CommonTool.getUrlAttributes()
 

@@ -8,7 +8,6 @@ import passport from 'passport'
 import session from 'express-session'
 import jsonwebtoken from 'jsonwebtoken'
 import express from 'express'
-import morgan from 'morgan'
 import IUser from '../interfaces/user.interface'
 import IJWT from '../interfaces/jwt.interface'
 import RequestTool from './request.tool'
@@ -74,10 +73,6 @@ export default class ServerTool {
     }
 
     const app: any = express()
-
-    if (configuration.morgan) {
-      app.use(morgan('combined'))
-    }
 
     if (configuration.static.enabled) {
       app.use(express.static(configuration.static.path))

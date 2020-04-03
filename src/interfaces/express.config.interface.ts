@@ -6,7 +6,6 @@ export default interface IExpressConfiguration {
     path: string
   }
   handleErrors: boolean
-  morgan: boolean
   listen: boolean
   static: {
     enabled: boolean

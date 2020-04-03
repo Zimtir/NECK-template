@@ -10,9 +10,9 @@
     "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "typeRoots": ["typings"],
+    "types": ["@sapper", "svelte"]
   },
-  "typeRoots": ["typings"],
-  "exclude": ["node_modules"],
-  "types": ["@sapper"]
+  "exclude": ["node_modules"]
 }

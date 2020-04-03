@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
+  "typeRoots": ["typings"],
   "exclude": ["node_modules"],
   "types": ["@sapper"]
 }

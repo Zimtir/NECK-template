@@ -4,7 +4,6 @@ import crypto from 'crypto'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
-import * as sapper from '@sapper/server'
 import passport from 'passport'
 import session from 'express-session'
 import jsonwebtoken from 'jsonwebtoken'
@@ -86,10 +85,6 @@ export default class ServerTool {
 
     if (configuration.compression.enabled) {
       app.use(compression({ threshold: configuration.compression.threshold }))
-    }
-
-    if (configuration.sapper) {
-      app.use(sapper.middleware())
     }
 
     if (configuration.bodyParser) {

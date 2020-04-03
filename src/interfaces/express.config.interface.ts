@@ -16,5 +16,4 @@ export default interface IExpressConfiguration {
     enabled: boolean
     threshold: number
   }
-  sapper: boolean
 }

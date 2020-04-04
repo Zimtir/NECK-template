@@ -103,4 +103,22 @@ export default class CommonTool {
 
     return output
   }
+
+  static convertNumberStr = (inputNumber: number, forms: string[]) => {
+    const lastNumber = inputNumber % 10
+
+    if (inputNumber > 10 && inputNumber < 20) {
+      return [inputNumber, forms[2]].join(' ')
+    }
+
+    if (lastNumber > 1 && lastNumber < 5) {
+      return [inputNumber, forms[1]].join(' ')
+    }
+
+    if (lastNumber === 1) {
+      return [inputNumber, forms[0]].join(' ')
+    }
+
+    return [inputNumber, forms[2]].join(' ')
+  }
 }

@@ -104,21 +104,26 @@ export default class CommonTool {
     return output
   }
 
-  static convertNumberStr = (inputNumber: number, forms: string[]) => {
+  static convertNumberStr = (inputNumber: number, forms: string[], returnNumber: boolean = false) => {
+    let output = ''
     const lastNumber = inputNumber % 10
 
+    const insertIntoOutput = (firstPart: number, secondPart: string) => {
+      if (returnNumber) {
+        output = [firstPart, secondPart].join(' ')
+      } else {
+        output = secondPart
+      }
+    }
+
     if (inputNumber > 10 && inputNumber < 20) {
-      return [inputNumber, forms[2]].join(' ')
-    }
+      insertIntoOutput(inputNumber, forms[2])
+    } else if (lastNumber > 1 && lastNumber < 5) {
+      insertIntoOutput(inputNumber, forms[1])
+    } else if (lastNumber === 1) {
+      insertIntoOutput(inputNumber, forms[0])
+    } else insertIntoOutput(inputNumber, forms[2])
 
-    if (lastNumber > 1 && lastNumber < 5) {
-      return [inputNumber, forms[1]].join(' ')
-    }
-
-    if (lastNumber === 1) {
-      return [inputNumber, forms[0]].join(' ')
-    }
-
-    return [inputNumber, forms[2]].join(' ')
+    return output
   }
 }

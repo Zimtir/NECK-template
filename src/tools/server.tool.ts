@@ -186,6 +186,18 @@ export default class ServerTool {
     next()
   }
 
+  static isNotAdmin = (req: any, res: any, next: any) => {
+    LoggerTool.log('isNotAdmin')
+    next()
+  }
+
+  static isAdmin = (req: any, res: any, next: any) => {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    ServerTool.needToBeAdmin(res)
+  }
+
   static ensureAuthenticated = (req: any, res: any, next: any) => {
     if (req.isAuthenticated()) {
       return next()
@@ -193,8 +205,12 @@ export default class ServerTool {
     ServerTool.needLogin(res)
   }
 
+  static needToBeAdmin = (res: any) => {
+    res.sendStatus(503)
+  }
+
   static needLogin = (res: any) => {
-    res.send(null)
+    res.sendStatus(503)
   }
 
   static handleServerErrors = (server: any) => {

@@ -104,6 +104,8 @@ export default class CommonTool {
     return output
   }
 
+  static numberWithSpaces = (number: number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
   static convertNumberStr = (inputNumber: number, forms: string[], returnNumber: boolean = false) => {
     let output = ''
     const lastNumber = inputNumber % 10
